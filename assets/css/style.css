@@ -1,0 +1,252 @@
+
+
+/*---*/
+.card-product img{
+  height: 180px;
+  object-fit: cover;
+}
+.price {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #198754;
+}
+
+
+
+
+
+
+/* ===== FLASH SALE MATCH FIGMA ===== */
+.flash-sale-wrap{
+  background:#1f2428;
+  border-radius:10px;
+  padding:22px 22px 18px;
+}
+
+.flash-sale-title{
+  color:#fff;
+  font-weight:800;
+  font-size:18px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:16px;
+}
+
+.flash-sale-row{
+  display:flex;
+  gap:18px;                /* ช่องว่างการ์ด */
+  overflow-x:auto;
+  padding:8px 4px 6px;
+  scroll-snap-type:x mandatory;
+}
+
+.flash-sale-row::-webkit-scrollbar{ height:8px;}
+.flash-sale-row::-webkit-scrollbar-thumb{
+  background:#3b4045; border-radius:10px;
+}
+
+.flash-card{
+  min-width:190px;         /* ความกว้างการ์ด */
+  max-width:190px;
+  height:260px;            /* ความสูงเท่ากัน */
+  background:#fff;
+  border-radius:12px;
+  border:0;
+  position:relative;
+  scroll-snap-align:start;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.flash-card .img-box{
+  height:150px;            /* กล่องรูป */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding-top:8px;
+}
+
+.flash-card img{
+  max-height:130px;
+  width:auto;
+  object-fit:contain;
+}
+
+.flash-card:hover {
+  transform: translateY(-8px);
+}
+
+.discount-badge{
+  position:absolute;
+  top:10px; left:10px;
+  background:#ff2d8d;
+  color:#fff;
+  font-size:12px;
+  padding:3px 8px;
+  border-radius:999px;
+  font-weight:800;
+  box-shadow:0 2px 6px rgba(0,0,0,.15);
+}
+
+.discount-badge-item {
+  top: 10px;
+  left: 10px;
+  background: #d1005d;
+  color: white;
+  padding: 5px 8px;
+  font-weight: bold;
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+
+.flash-name{
+  font-size:12px;
+  font-weight:700;
+  text-align:center;
+  line-height:1.35;
+  padding:0 8px;
+  min-height:34px;
+}
+
+.flash-price-now{
+  color:#e91e63;
+  font-weight:800;
+  text-align:center;
+  margin-top:4px;
+}
+
+.flash-price-old{
+  color:#9aa0a6;
+  font-size:12px;
+  text-decoration:line-through;
+  text-align:center;
+  margin-top:2px;
+}
+
+
+
+
+/* ===== NORMAL PRODUCT GRID ===== */
+.product-card{
+  border-radius: 10px;
+  overflow:hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card img{
+  height: 210px;
+  object-fit: contain;
+  background:#fff;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+}
+
+.product-title{
+  font-size: .9rem;
+  font-weight: 600;
+  min-height: 40px;
+}
+
+.price-now{
+  color:#e91e63;
+  font-weight:800;
+}
+
+.price-old{
+  color:#999;
+  font-size:.8rem;
+  text-decoration: line-through;
+}
+
+.btn-detail{
+  background:#083058ff;
+  color:#fff;
+  border:0;
+  border-radius:0;
+  font-weight:600;
+}
+.btn-detail:hover{ background:#1b5fa3; color:#fff; }
+
+
+/* banner about */
+.hero-about {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    background-image: url("../img/Cerave-banner.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 260px;
+}
+
+.hero-about-overlay {
+    background: linear-gradient(
+        135deg,
+        rgba(0, 32, 96, 0.75),
+        rgba(0, 104, 192, 0.75)
+    );
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.hero-about h1,
+.hero-about p {
+    color: #fff !important;
+}
+
+
+/* =========================
+   Password Toggle (eye icon)
+   ========================= */
+.password-wrap{
+    position: relative;
+    width: 100%;
+}
+
+/* ให้ช่อง password เว้นที่ด้านขวาไว้สำหรับปุ่มตา */
+.password-wrap input{
+    padding-right: 44px !important;
+}
+
+/* สำคัญ: ปุ่มในหน้านี้มี style .auth-page .container button ครอบอยู่
+   ต้อง override ให้ปุ่มตาไม่กลายเป็นปุ่มใหญ่ */
+.toggle-pass{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+
+    cursor: pointer;
+
+    /* กันเอฟเฟกต์ปุ่มเดิม */
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+    box-shadow: none !important;
+}
+
+/* ไอคอนแบบง่ายด้วย emoji (ไม่ต้องใช้ font-awesome) */
+.icon-eye::before{
+    content: "👁";
+    font-size: 16px;
+}
+
+/* ตอนอยู่สถานะโชว์ password */
+.toggle-pass.is-shown .icon-eye::before{
+    content: "🙈";
+}
