@@ -146,23 +146,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['form_type'] ?? '') === 'lo
           'is_admin'   => $colAdmin ? (int)$user[$colAdmin] : 0
         ];
 
-        // //// header(header: "Location: " . BASE_URL . "/admin/dashboard.php");
-        // //// exit;
+
         // $return = $_GET['return'] ?? '';
-        // if ($return) {
+
+        // if ($return && str_starts_with($return, BASE_URL)) {
         //   header("Location: " . $return);
         // } else {
-        //   header("Location: " . BASE_URL . "/admin/dashboard.php");
-        // }
+        //   header("Location: " . BASE_URL . "/index.php");
+        //   }
         // exit;
+
         $return = $_GET['return'] ?? '';
 
-        if ($return && str_starts_with($return, BASE_URL)) {
-          header("Location: " . $return);
-        } else {
-          header("Location: " . BASE_URL . "/index.php");
+        // เพิ่มความปลอดภัย + ความสะดวก: รองรับทั้ง return แบบเต็ม (ขึ้นต้นด้วย BASE_URL) และแบบ relative (/path)
+        if ($return) {
+          if (str_starts_with($return, '/')) {
+            $loginRedirectUrl = BASE_URL . $return;
+          } elseif (str_starts_with($return, BASE_URL)) {
+            $loginRedirectUrl = $return;
+          } else {
+            $loginRedirectUrl = BASE_URL . "/index.php";
           }
-        exit;
+        } else {
+          $loginRedirectUrl = BASE_URL . "/index.php";
+        }
+
+        // ป้องกัน session fixation
+        session_regenerate_id(true);
+
+        // ตั้งค่าสำหรับ popup
+        $loginSuccess = true;
+        $loginSuccessMessage = "Login สำเร็จ";
+        
       }
     }
   }
@@ -307,6 +322,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['form_type'] ?? '') === 'lo
       });
     </script>
   <?php endif; ?>
+
+  <?php if (!empty($loginSuccess) && $loginSuccess && !empty($loginRedirectUrl)): ?>
+    <script>
+      Swal.fire({
+        icon: 'success',
+        title: 'สำเร็จ!',
+        text: <?= js_escape(str: $loginSuccessMessage) ?>,
+        confirmButtonText: 'ไปต่อ',
+        confirmButtonColor: '#1b5fa3',
+        allowOutsideClick: false
+      }).then(() => {
+        window.location.href = <?= js_escape(str: $loginRedirectUrl) ?>;
+      });
+    </script>
+  <?php endif; ?>
+
 
 </body>
 
